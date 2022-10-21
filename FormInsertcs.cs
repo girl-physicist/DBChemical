@@ -27,11 +27,11 @@ namespace DBChemical
         private void GetData()
         {
             ParentForm.Element.Name = textBoxName.Text;
-            ParentForm.Element.NuclearCharge = textBoxMassa.Text;
-            ParentForm.Element.AtomicRadius = textBox1.Text;
-            ParentForm.Element.DebyeTemperature= textBox2.Text;
-            ParentForm.Element.Symbol = textBox3.Text;
-            ParentForm.Element.MolarMass = textBox4.Text;
+            ParentForm.Element.Symbol = textBoxSymbol.Text;
+            ParentForm.Element.NuclearCharge = textBoxNuclearCharge.Text;
+            ParentForm.Element.MolarMass = textBoxMolarMass.Text;
+            ParentForm.Element.AtomicRadius = textBoxAtomicRadius.Text;
+            ParentForm.Element.DebyeTemperature = textBoxDebyeTemperature.Text;
 
         }
     }

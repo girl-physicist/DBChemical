@@ -32,11 +32,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.textBoxMassa = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxSymbol = new System.Windows.Forms.TextBox();
+            this.textBoxNuclearCharge = new System.Windows.Forms.TextBox();
+            this.textBoxMolarMass = new System.Windows.Forms.TextBox();
+            this.textBoxAtomicRadius = new System.Windows.Forms.TextBox();
+            this.textBoxDebyeTemperature = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonInsert
@@ -52,74 +56,114 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 13);
+            this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 16);
+            this.label1.Size = new System.Drawing.Size(140, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "name";
+            this.label1.Text = "Название элемента";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 47);
+            this.label2.Location = new System.Drawing.Point(17, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 16);
+            this.label2.Size = new System.Drawing.Size(135, 16);
             this.label2.TabIndex = 2;
-            this.label2.Text = "massa";
+            this.label2.Text = "химический символ";
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(122, 6);
+            this.textBoxName.Location = new System.Drawing.Point(158, 6);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(100, 22);
             this.textBoxName.TabIndex = 3;
             // 
-            // textBoxMassa
+            // textBoxSymbol
             // 
-            this.textBoxMassa.Location = new System.Drawing.Point(122, 47);
-            this.textBoxMassa.Name = "textBoxMassa";
-            this.textBoxMassa.Size = new System.Drawing.Size(100, 22);
-            this.textBoxMassa.TabIndex = 4;
+            this.textBoxSymbol.Location = new System.Drawing.Point(158, 34);
+            this.textBoxSymbol.Name = "textBoxSymbol";
+            this.textBoxSymbol.Size = new System.Drawing.Size(100, 22);
+            this.textBoxSymbol.TabIndex = 4;
             // 
-            // textBox1
+            // textBoxNuclearCharge
             // 
-            this.textBox1.Location = new System.Drawing.Point(125, 88);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(96, 22);
-            this.textBox1.TabIndex = 5;
+            this.textBoxNuclearCharge.Location = new System.Drawing.Point(158, 62);
+            this.textBoxNuclearCharge.Name = "textBoxNuclearCharge";
+            this.textBoxNuclearCharge.Size = new System.Drawing.Size(100, 22);
+            this.textBoxNuclearCharge.TabIndex = 5;
             // 
-            // textBox2
+            // textBoxMolarMass
             // 
-            this.textBox2.Location = new System.Drawing.Point(129, 124);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(92, 22);
-            this.textBox2.TabIndex = 6;
+            this.textBoxMolarMass.Location = new System.Drawing.Point(158, 90);
+            this.textBoxMolarMass.Name = "textBoxMolarMass";
+            this.textBoxMolarMass.Size = new System.Drawing.Size(100, 22);
+            this.textBoxMolarMass.TabIndex = 6;
             // 
-            // textBox3
+            // textBoxAtomicRadius
             // 
-            this.textBox3.Location = new System.Drawing.Point(133, 154);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(87, 22);
-            this.textBox3.TabIndex = 7;
+            this.textBoxAtomicRadius.Location = new System.Drawing.Point(158, 118);
+            this.textBoxAtomicRadius.Name = "textBoxAtomicRadius";
+            this.textBoxAtomicRadius.Size = new System.Drawing.Size(100, 22);
+            this.textBoxAtomicRadius.TabIndex = 7;
             // 
-            // textBox4
+            // textBoxDebyeTemperature
             // 
-            this.textBox4.Location = new System.Drawing.Point(137, 189);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(84, 22);
-            this.textBox4.TabIndex = 8;
+            this.textBoxDebyeTemperature.Location = new System.Drawing.Point(158, 146);
+            this.textBoxDebyeTemperature.Name = "textBoxDebyeTemperature";
+            this.textBoxDebyeTemperature.Size = new System.Drawing.Size(100, 22);
+            this.textBoxDebyeTemperature.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "заряд ядра";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 96);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 16);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "молярная масса";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 124);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 16);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "атомный радиус";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 152);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(137, 16);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "температура Дебая";
             // 
             // FormInsertcs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(264, 414);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBoxMassa);
+            this.Controls.Add(this.textBoxDebyeTemperature);
+            this.Controls.Add(this.textBoxAtomicRadius);
+            this.Controls.Add(this.textBoxMolarMass);
+            this.Controls.Add(this.textBoxNuclearCharge);
+            this.Controls.Add(this.textBoxSymbol);
             this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonInsert);
@@ -136,10 +180,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.TextBox textBoxMassa;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxSymbol;
+        private System.Windows.Forms.TextBox textBoxNuclearCharge;
+        private System.Windows.Forms.TextBox textBoxMolarMass;
+        private System.Windows.Forms.TextBox textBoxAtomicRadius;
+        private System.Windows.Forms.TextBox textBoxDebyeTemperature;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
