@@ -29,84 +29,100 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonShowDB = new System.Windows.Forms.Button();
+            this.buttonInsert = new System.Windows.Forms.Button();
+            this.buttonFind = new System.Windows.Forms.Button();
+            this.name = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(40, 37);
+            this.dataGridView1.Location = new System.Drawing.Point(33, 37);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(596, 260);
+            this.dataGridView1.Size = new System.Drawing.Size(1203, 260);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
-            // button1
+            // buttonShowDB
             // 
-            this.button1.Location = new System.Drawing.Point(137, 355);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 65);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "connect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonShowDB.Location = new System.Drawing.Point(214, 307);
+            this.buttonShowDB.Name = "buttonShowDB";
+            this.buttonShowDB.Size = new System.Drawing.Size(166, 65);
+            this.buttonShowDB.TabIndex = 1;
+            this.buttonShowDB.Text = "ShowDB";
+            this.buttonShowDB.UseVisualStyleBackColor = true;
+            this.buttonShowDB.Click += new System.EventHandler(this.ButtonShowDB_Click);
             // 
-            // button2
+            // buttonInsert
             // 
-            this.button2.Location = new System.Drawing.Point(656, 37);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonInsert.Location = new System.Drawing.Point(420, 321);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsert.TabIndex = 2;
+            this.buttonInsert.Text = "Insert";
+            this.buttonInsert.UseVisualStyleBackColor = true;
+            this.buttonInsert.Click += new System.EventHandler(this.ButtonInsert_Click);
             // 
-            // button3
+            // buttonFind
             // 
-            this.button3.Location = new System.Drawing.Point(656, 67);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonFind.Location = new System.Drawing.Point(33, 321);
+            this.buttonFind.Name = "buttonFind";
+            this.buttonFind.Size = new System.Drawing.Size(75, 23);
+            this.buttonFind.TabIndex = 5;
+            this.buttonFind.Text = "Find";
+            this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.ButtonFind_Click);
             // 
-            // button4
+            // name
             // 
-            this.button4.Location = new System.Drawing.Point(656, 97);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.name.AutoSize = true;
+            this.name.Location = new System.Drawing.Point(12, 356);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(41, 16);
+            this.name.TabIndex = 6;
+            this.name.Text = "name";
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(59, 356);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(100, 22);
+            this.textBoxName.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 450);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1248, 450);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.name);
+            this.Controls.Add(this.buttonFind);
+            this.Controls.Add(this.buttonInsert);
+            this.Controls.Add(this.buttonShowDB);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonShowDB;
+        private System.Windows.Forms.Button buttonInsert;
+        private System.Windows.Forms.Button buttonFind;
+        private System.Windows.Forms.Label name;
+        private System.Windows.Forms.TextBox textBoxName;
     }
 }
 

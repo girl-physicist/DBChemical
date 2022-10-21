@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,26 +9,50 @@ namespace DBChemical
 {
     public partial class Form1 : Form
     {
-        public const string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\girl-\\source\\repos\\DBChemical\\DBElements.mdf;Integrated Security=True";
-        private string _name = "nnn";
-        private double _massa = 35/10^10;
-            public Form1()
+        public ChemicalElementModal Element { get; private set; }
+        private readonly SqlConnection _connection;
+        private SqlDataAdapter _adapter = null;
+        private DataSet _dataSet = null;
+        private int _numerLastColumn;
+        private bool _newRowAdd = false;
+        private const string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\girl-\\source\\repos\\ProjectDataBase\\Database1.mdf;Integrated Security=True";
+        public Form1()
         {
             InitializeComponent();
+            Element = new ChemicalElementModal();
+            _connection = new SqlConnection(_connectionString);
         }
-
-        private static async Task ConnectWithDB(Action<SqlConnection> action)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            // Создание подключения
-            SqlConnection connection = new SqlConnection(connectionString);
-
+            await ConnectWithDB(GetData);
+        }
+        private void ReloadData()
+        {
             try
             {
-                // Открываем подключение
-                await connection.OpenAsync();
-                action(connection);
-                //MessageBox.Show("Подключение открыто");
+                _dataSet.Tables["Elements"].Clear();
+                _adapter.Fill(_dataSet, "Elements");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ShowData();
 
+        }
+        private SqlDataAdapter CreateAdapter(string sqlCommand, SqlConnection connection)
+        {
+            var command = new SqlCommand(sqlCommand, connection);
+            return new SqlDataAdapter(command);
+        }
+        public async Task ConnectWithDB(Action<SqlConnection> action)
+        {
+            try
+            {
+                await _connection.OpenAsync();
+                action(_connection);
+                FillDataSet();
+                ShowData();
             }
             catch (SqlException ex)
             {
@@ -35,51 +60,123 @@ namespace DBChemical
             }
             finally
             {
-                // закрываем подключение
-                connection.Close();
-                //MessageBox.Show("Подключение закрыто");
+                _connection.Close();
             }
         }
-
-        private SqlDataAdapter CreateAdapter(string text, SqlConnection connection)
+        private void FillDataSet()
         {
-            var command = new SqlCommand(text, connection);
-            return new SqlDataAdapter(command);
+            _dataSet = new DataSet();
+            _adapter.Fill(_dataSet, "Elements");
         }
         private void GetData(SqlConnection connection)
         {
-            var sqlDataAdap = CreateAdapter("SELECT * FROM [Table]", connection);
-            ShowData(sqlDataAdap);
+            _adapter = new SqlDataAdapter("SELECT *, 'Delete' AS [Delete] FROM [Elements]", connection);
         }
-
-        private void ShowData(SqlDataAdapter sqlDataAdap)
+        private void ShowData()
         {
-            DataTable dtRecord = new DataTable();
-            sqlDataAdap.Fill(dtRecord);
-            dataGridView1.DataSource = dtRecord;
+            try
+            {
+                dataGridView1.DataSource = _dataSet.Tables["Elements"];
+                _numerLastColumn = dataGridView1.ColumnCount - 1;
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                    dataGridView1[_numerLastColumn, i] = linkCell;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void FindElementByName(SqlConnection connection)
         {
-            var sqlDataAdap = CreateAdapter($"SELECT * FROM [Table] where [nameEl] = '{_name}'", connection);
-            ShowData(sqlDataAdap);
+            _adapter = CreateAdapter($"SELECT *, 'Delete' AS [Delete] FROM [Elements] where [nameElement] = '{textBoxName.Text}'", connection);
         }
-
-        private void Create(SqlConnection connection)
+        public void Insert(SqlConnection connection)
         {
-            var a = $"INSERT INTO [Table] ([nameEl], [massa]) VALUES ('{_name}', {_massa})";
+            var a = $"INSERT INTO [Elements] ([nameElement], [symbol], [nuclearCharge], [molarMass], [atomicRadius], [DebyeTemperature]) VALUES" +
+                $" ('{Element.Name}','{Element.Symbol}',{Element.NuclearCharge},{Element.MolarMass},{Element.AtomicRadius},{Element.DebyeTemperature})";
+            _adapter = CreateAdapter(a, connection);
 
-
-            var sqlDataAdap = CreateAdapter(a, connection);
-            ShowData(sqlDataAdap);
         }
-
-
-        private async void button1_Click(object sender, EventArgs e)
-        { //_name = text
-           
-          //  await ConnectWithDB(FindElementByName);
-            await ConnectWithDB(Create);
+        public async Task Insert()
+        {
+            await ConnectWithDB(Insert);
             await ConnectWithDB(GetData);
+        }
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            {
+                var rowIndex = 0;
+                try
+                {
+                    if (e.ColumnIndex == _numerLastColumn)
+                    {
+                        string task = dataGridView1.Rows[e.RowIndex].Cells[_numerLastColumn].Value.ToString();
+                        if (task == "Delete")
+                        {
+                            if (MessageBox.Show("Вы действительно хотите удалить эту строку?", "Удаление строки",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                                == DialogResult.Yes)
+                            {
+                                rowIndex = e.RowIndex;
+                                dataGridView1.Rows.RemoveAt(rowIndex);
+                                _adapter.Update(_dataSet, "Elements");
+                            }
+                        }
+                        else if (task == "Update")
+                        {
+                            int r = e.RowIndex;
+                            _dataSet.Tables["Elements"].Rows[r][1] = dataGridView1.Rows[r].Cells[1].Value;
+                            _dataSet.Tables["Elements"].Rows[r][2] = dataGridView1.Rows[r].Cells[2].Value;
+                            _dataSet.Tables["Elements"].Rows[r][3] = dataGridView1.Rows[r].Cells[3].Value;
+                            _dataSet.Tables["Elements"].Rows[r][4] = dataGridView1.Rows[r].Cells[4].Value;
+                            _dataSet.Tables["Elements"].Rows[r][5] = dataGridView1.Rows[r].Cells[5].Value;
+                            _dataSet.Tables["Elements"].Rows[r][6] = dataGridView1.Rows[r].Cells[6].Value;
+                            _adapter.Update(_dataSet, "Elements");
+                            dataGridView1.Rows[e.RowIndex].Cells[_numerLastColumn].Value = "Delete";
+                        }
+                        ReloadData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private async void ButtonShowDB_Click(object sender, EventArgs e)
+        {
+
+            await ConnectWithDB(GetData);
+        }
+        private async void ButtonFind_Click(object sender, EventArgs e)
+        {
+            await ConnectWithDB(FindElementByName);
+        }
+        private void ButtonInsert_Click(object sender, EventArgs e)
+        {
+            FormInsertcs form = new FormInsertcs(this);
+            form.Show();
+        }
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (_newRowAdd == false)
+                {
+                    var rowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow row = dataGridView1.Rows[rowIndex];
+                    DataGridViewLinkCell linkCell = new DataGridViewLinkCell();
+                    dataGridView1[_numerLastColumn, rowIndex] = linkCell;
+                    row.Cells["Delete"].Value = "Update";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
