@@ -63,9 +63,9 @@
             // 
             // buttonInsert
             // 
-            this.buttonInsert.Location = new System.Drawing.Point(420, 321);
+            this.buttonInsert.Location = new System.Drawing.Point(421, 307);
             this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsert.Size = new System.Drawing.Size(152, 65);
             this.buttonInsert.TabIndex = 2;
             this.buttonInsert.Text = "Insert";
             this.buttonInsert.UseVisualStyleBackColor = true;
@@ -73,9 +73,9 @@
             // 
             // buttonFind
             // 
-            this.buttonFind.Location = new System.Drawing.Point(33, 321);
+            this.buttonFind.Location = new System.Drawing.Point(33, 307);
             this.buttonFind.Name = "buttonFind";
-            this.buttonFind.Size = new System.Drawing.Size(75, 23);
+            this.buttonFind.Size = new System.Drawing.Size(133, 37);
             this.buttonFind.TabIndex = 5;
             this.buttonFind.Text = "Find";
             this.buttonFind.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(59, 356);
+            this.textBoxName.Location = new System.Drawing.Point(66, 353);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(100, 22);
             this.textBoxName.TabIndex = 7;
