@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Linq;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -90,8 +91,8 @@ namespace DBChemical
             }
         }
         private void FindElementByName(SqlConnection connection)
-        {
-            _adapter = CreateAdapter($"SELECT *, 'Delete' AS [Delete] FROM [Elements] where [nameElement] = '{textBoxName.Text}'", connection);
+        {           
+            _adapter = CreateAdapter($"SELECT *, 'Delete' AS [Delete] FROM [Elements] where [nameElement]  = '{textBoxName.Text}'", connection);
         }
         public void Insert(SqlConnection connection)
         {
@@ -146,20 +147,6 @@ namespace DBChemical
                 }
             }
         }
-        private async void ButtonShowDB_Click(object sender, EventArgs e)
-        {
-
-            await ConnectWithDB(GetData);
-        }
-        private async void ButtonFind_Click(object sender, EventArgs e)
-        {
-            await ConnectWithDB(FindElementByName);
-        }
-        private void ButtonInsert_Click(object sender, EventArgs e)
-        {
-            FormInsertcs form = new FormInsertcs(this);
-            form.Show();
-        }
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -178,6 +165,21 @@ namespace DBChemical
                 MessageBox.Show(ex.Message, "Ошибка!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private async void ButtonShowDB_Click(object sender, EventArgs e)
+        {
+
+            await ConnectWithDB(GetData);
+        }
+        private async void ButtonFind_Click(object sender, EventArgs e)
+        {
+            await ConnectWithDB(FindElementByName);
+        }
+        private void ButtonInsert_Click(object sender, EventArgs e)
+        {
+            FormInsertcs form = new FormInsertcs(this);
+            form.Show();
+        }
+       
     }
 }
 

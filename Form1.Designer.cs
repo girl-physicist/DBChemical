@@ -34,6 +34,8 @@
             this.buttonFind = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxSymbol = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,11 +97,29 @@
             this.textBoxName.Size = new System.Drawing.Size(100, 22);
             this.textBoxName.TabIndex = 7;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 395);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "sumbol";
+            // 
+            // textBoxSymbol
+            // 
+            this.textBoxSymbol.Location = new System.Drawing.Point(66, 388);
+            this.textBoxSymbol.Name = "textBoxSymbol";
+            this.textBoxSymbol.Size = new System.Drawing.Size(100, 22);
+            this.textBoxSymbol.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 450);
+            this.Controls.Add(this.textBoxSymbol);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.name);
             this.Controls.Add(this.buttonFind);
@@ -123,6 +143,8 @@
         private System.Windows.Forms.Button buttonFind;
         private System.Windows.Forms.Label name;
         private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxSymbol;
     }
 }
 

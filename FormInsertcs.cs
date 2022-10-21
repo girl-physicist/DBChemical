@@ -32,7 +32,6 @@ namespace DBChemical
             ParentForm.Element.MolarMass = textBoxMolarMass.Text;
             ParentForm.Element.AtomicRadius = textBoxAtomicRadius.Text;
             ParentForm.Element.DebyeTemperature = textBoxDebyeTemperature.Text;
-
         }
     }
 }

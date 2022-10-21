@@ -45,9 +45,9 @@
             // 
             // buttonInsert
             // 
-            this.buttonInsert.Location = new System.Drawing.Point(122, 312);
+            this.buttonInsert.Location = new System.Drawing.Point(45, 189);
             this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(75, 23);
+            this.buttonInsert.Size = new System.Drawing.Size(169, 53);
             this.buttonInsert.TabIndex = 0;
             this.buttonInsert.Text = "Insert";
             this.buttonInsert.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 414);
+            this.ClientSize = new System.Drawing.Size(264, 265);
             this.Controls.Add(this.textBoxDebyeTemperature);
             this.Controls.Add(this.textBoxAtomicRadius);
             this.Controls.Add(this.textBoxMolarMass);
