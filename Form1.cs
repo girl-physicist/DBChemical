@@ -46,8 +46,10 @@ namespace DBChemical
             var command = new SqlCommand(sqlCommand, connection);
             var adapter = new SqlDataAdapter(command);
             var _sqlBuilder = new SqlCommandBuilder(adapter);
+            _sqlBuilder.GetInsertCommand();
             _sqlBuilder.GetDeleteCommand();
             _sqlBuilder.GetUpdateCommand();
+
             return adapter;
         }
         public async Task ConnectWithDB(Action<SqlConnection> action)
@@ -100,10 +102,16 @@ namespace DBChemical
         }
         public void Insert(SqlConnection connection)
         {
-            var a = $"INSERT INTO [Elements] ([nameElement], [symbol], [nuclearCharge], [molarMass], [atomicRadius], [DebyeTemperature]) VALUES" +
-                $" ('{Element.Name}','{Element.Symbol}',{Element.NuclearCharge},{Element.MolarMass},{Element.AtomicRadius},{Element.DebyeTemperature})";
-            _adapter = CreateAdapter(a, connection);
-
+            var adapter = CreateAdapter("SELECT *, 'Delete' AS [Delete] FROM [Elements]", _connection);
+            DataRow row = _dataSet.Tables["Elements"].NewRow();
+            row["nameElement"] = Element.Name;
+            row["symbol"] = Element.Symbol;
+            row["nuclearCharge"] = Element.NuclearCharge;
+            row["molarMass"] = Element.MolarMass;
+            row["atomicRadius"] = Element.AtomicRadius;
+            row["DebyeTemperature"] = Element.DebyeTemperature;
+            _dataSet.Tables["Elements"].Rows.Add(row);
+            adapter.Update(_dataSet, "Elements");
         }
         public async Task Insert()
         {
@@ -112,7 +120,6 @@ namespace DBChemical
         }
         private async void ButtonShowDB_Click(object sender, EventArgs e)
         {
-
             await ConnectWithDB(GetData);
         }
         private async void ButtonFind_Click(object sender, EventArgs e)
@@ -152,36 +159,33 @@ namespace DBChemical
                 if (e.ColumnIndex == _numerLastColumn)
                 {
                     string task = dataGridView1.Rows[e.RowIndex].Cells[_numerLastColumn].Value.ToString();
-                    if (task == "Delete")
+                    switch (task)
                     {
-                        if (MessageBox.Show("Вы действительно хотите удалить эту строку?", "Удаление строки",
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                            == DialogResult.Yes)
-                        {
-                            rowIndex = e.RowIndex;
-                            dataGridView1.Rows.RemoveAt(rowIndex);
-
-                            adapter.Update(_dataSet, "Elements");
-
-
-
-                        }
-                    }
-                    else if (task == "Update")
-                    {
-
-                        int r = e.RowIndex;
-
-                        _dataSet.Tables["Elements"].Rows[r][1] = dataGridView1.Rows[r].Cells[1].Value;
-                        _dataSet.Tables["Elements"].Rows[r][2] = dataGridView1.Rows[r].Cells[2].Value;
-                        _dataSet.Tables["Elements"].Rows[r][3] = dataGridView1.Rows[r].Cells[3].Value;
-                        _dataSet.Tables["Elements"].Rows[r][4] = dataGridView1.Rows[r].Cells[4].Value;
-                        _dataSet.Tables["Elements"].Rows[r][5] = dataGridView1.Rows[r].Cells[5].Value;
-                        _dataSet.Tables["Elements"].Rows[r][6] = dataGridView1.Rows[r].Cells[6].Value;
-
-                        adapter.Update(_dataSet, "Elements");
-
-                        dataGridView1.Rows[e.RowIndex].Cells[_numerLastColumn].Value = "Delete";
+                        case "Delete":
+                            {
+                                if (MessageBox.Show("Вы действительно хотите удалить эту строку?", "Удаление строки",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                                    == DialogResult.Yes)
+                                {
+                                    rowIndex = e.RowIndex;
+                                    dataGridView1.Rows.RemoveAt(rowIndex);
+                                    adapter.Update(_dataSet, "Elements");
+                                }
+                                break;
+                            }
+                        case "Update":
+                            {
+                                int r = e.RowIndex;
+                                _dataSet.Tables["Elements"].Rows[r][1] = dataGridView1.Rows[r].Cells[1].Value;
+                                _dataSet.Tables["Elements"].Rows[r][2] = dataGridView1.Rows[r].Cells[2].Value;
+                                _dataSet.Tables["Elements"].Rows[r][3] = dataGridView1.Rows[r].Cells[3].Value;
+                                _dataSet.Tables["Elements"].Rows[r][4] = dataGridView1.Rows[r].Cells[4].Value;
+                                _dataSet.Tables["Elements"].Rows[r][5] = dataGridView1.Rows[r].Cells[5].Value;
+                                _dataSet.Tables["Elements"].Rows[r][6] = dataGridView1.Rows[r].Cells[6].Value;
+                                adapter.Update(_dataSet, "Elements");
+                                dataGridView1.Rows[e.RowIndex].Cells[_numerLastColumn].Value = "Delete";
+                                break;
+                            }
                     }
                     ReloadData();
                 }
